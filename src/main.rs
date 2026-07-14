@@ -24,9 +24,12 @@ use crate::{
     domain::weather::WeatherResponse,
 };
 
+use sqlx::PgPool;
+
 #[derive(Clone)]
 struct AppState {
     dmi_client: DmiClient,
+    database: PgPool,
 }
 
 #[derive(Debug, Deserialize)]
@@ -42,6 +45,20 @@ async fn main() {
         .compact()
         .init();
 
+    dotenvy::dotenv().ok();
+
+    let database_url =
+        std::env::var("DATABASE_URL").expect("DATABASE_URL skal være sat");
+
+    let database = PgPool::connect(&database_url)
+        .await
+        .expect("Kunne ikke forbinde til PostgreSQL");
+
+    sqlx::migrate!()
+        .run(&database)
+        .await
+        .expect("Kunne ikke køre databasemigrations");
+
     let http_client = Client::builder()
         .timeout(Duration::from_secs(15))
         .user_agent("dmi-weather-app/0.1")
@@ -50,6 +67,7 @@ async fn main() {
 
     let state = AppState {
         dmi_client: DmiClient::new(http_client),
+        database,
     };
 
     let cors = CorsLayer::new()
@@ -130,7 +148,6 @@ impl IntoResponse for AppError {
     fn into_response(self) -> Response {
         let status = match &self {
             Self::InvalidCoordinates(_) => StatusCode::BAD_REQUEST,
-
             Self::Dmi(_) => StatusCode::BAD_GATEWAY,
         };
 
