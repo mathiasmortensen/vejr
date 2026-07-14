@@ -1,0 +1,134 @@
+# --------------------------------------------------
+
+# Rust
+
+# --------------------------------------------------
+
+/target/
+**/*.rs.bk
+*.pdb
+
+# --------------------------------------------------
+
+# Environment variables and secrets
+
+# --------------------------------------------------
+
+.env
+.env.*
+!.env.example
+
+*.pem
+*.key
+*.crt
+
+# --------------------------------------------------
+
+# Logs and temporary files
+
+# --------------------------------------------------
+
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# --------------------------------------------------
+
+# Node.js / SvelteKit frontend
+
+# --------------------------------------------------
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+.svelte-kit/
+.vercel/
+.netlify/
+.output/
+dist/
+build/
+coverage/
+
+# Local package-manager state
+
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# --------------------------------------------------
+
+# IDEs and editors
+
+# --------------------------------------------------
+
+.idea/
+.vscode/
+*.iml
+
+# Keep shared VS Code configuration if added later
+
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# --------------------------------------------------
+
+# Operating systems
+
+# --------------------------------------------------
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+$RECYCLE.BIN/
+
+# --------------------------------------------------
+
+# Local database files
+
+# PostgreSQL itself is external, but these may appear
+
+# during local testing.
+
+# --------------------------------------------------
+
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# --------------------------------------------------
+
+# Docker overrides and local configuration
+
+# --------------------------------------------------
+
+docker-compose.override.yml
+compose.override.yml
+
+# --------------------------------------------------
+
+# Profiling and test artifacts
+
+# --------------------------------------------------
+
+*.profraw
+*.profdata
+tarpaulin-report.html
+junit.xml
