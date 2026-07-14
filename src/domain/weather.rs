@@ -62,7 +62,8 @@ pub enum PrecipitationType {
     Hail,
 }
 
-#[derive(Debug, Clone, Serialize, PartialEq)]
+#[derive(Debug, Clone, Copy, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
 pub enum WeatherCondition {
     Clear,
     PartlyCloudy,
